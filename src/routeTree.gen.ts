@@ -16,9 +16,15 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const FavouritesLazyImport = createFileRoute('/favourites')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const FavouritesLazyRoute = FavouritesLazyImport.update({
+  path: '/favourites',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/favourites.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
@@ -33,11 +39,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/favourites': {
+      preLoaderRoute: typeof FavouritesLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([IndexLazyRoute])
+export const routeTree = rootRoute.addChildren([
+  IndexLazyRoute,
+  FavouritesLazyRoute,
+])
 
 /* prettier-ignore-end */

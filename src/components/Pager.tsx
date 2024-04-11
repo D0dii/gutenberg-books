@@ -1,13 +1,12 @@
-export default function Pager({ page, next }: { page: number; next: boolean }) {
+import { useNavigate } from "@tanstack/react-router";
+
+export default function Pager({ search, page, next }: { search: string; page: number; next: boolean }) {
+  const navigate = useNavigate();
   function handlePrevious() {
-    let params = new URLSearchParams(window.location.search);
-    params.set("page", (page - 1).toString());
-    window.location.search = params.toString();
+    navigate({ search: { search: search, page: page - 1 } });
   }
   function handleNext() {
-    let params = new URLSearchParams(window.location.search);
-    params.set("page", (page + 1).toString());
-    window.location.search = params.toString();
+    navigate({ search: { search: search, page: page + 1 } });
   }
 
   return (

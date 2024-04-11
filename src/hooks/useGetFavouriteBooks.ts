@@ -5,5 +5,5 @@ export default function useGetFavouriteBooks() {
   } else {
     favourites = [];
   }
-  return favourites;
+  return favourites as Book[];
 }
