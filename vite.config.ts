@@ -10,6 +10,7 @@ export default defineConfig({
       hooks: "/src/hooks",
       components: "/src/components",
       pages: "/src/pages",
+      routes: "/src/routes",
     },
   },
 });

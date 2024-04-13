@@ -23,7 +23,8 @@
     "paths": {
       "hooks/*": ["src/hooks/*"],
       "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"]
+      "pages/*": ["src/pages/*"],
+      "routes/*": ["src/routes/*"]
     }
   },
   "include": ["src"],

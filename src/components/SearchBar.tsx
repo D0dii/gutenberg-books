@@ -1,21 +1,23 @@
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useDebouncedCallback } from "use-debounce";
+import { Route } from "routes/index.lazy";
 
-export default function SearchBar() {
-  let params = useSearch({ strict: false });
+export default function SearchBar({ isPending }: { isPending: boolean }) {
+  let { search } = Route.useSearch();
   const navigate = useNavigate();
 
   const searchChange = useDebouncedCallback((e: any) => {
     navigate({ search: { search: e.target.value } });
   }, 1000);
   return (
-    <div className="bg-secondary">
+    <div className="mt-4">
       <input
-        className="border-solid border-green-400 border-2"
+        className="border-none rounded-2xl p-2 text-primary outline-none placeholder:text-secondary placeholder:italic"
         type="search"
-        placeholder="Search.."
+        placeholder="Search for a book..."
         onChange={searchChange}
-        defaultValue={params.search ?? ""}
+        defaultValue={search ?? ""}
+        disabled={isPending}
       ></input>
     </div>
   );

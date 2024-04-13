@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useGetFavouriteBooks from "../hooks/useGetFavouriteBooks";
 import useSaveFavouriteBooks from "../hooks/useSaveFavouriteBooks";
+import { Link } from "@tanstack/react-router";
 
 type props = { book: Book } & { readonly?: boolean };
 
@@ -15,9 +16,14 @@ export default function Book({ book, readonly = false }: props) {
     setFavourite(!favourite);
   }
   return (
-    <div className="flex flex-col gap-2 items-center bg-white pb-2 rounded-2xl overflow-hidden">
-      <img alt={`Image of ${book.title} book`} className="w-full h-72" src={book.formats["image/jpeg"]}></img>
-
+    <div className="flex flex-col gap-2 items-center bg-secondary pb-2 rounded-2xl overflow-hidden">
+      <Link to="/book" search={{ ID: book.id }} className="w-full" title="Go to book page">
+        <img
+          alt={`Image of ${book.title} book`}
+          className="w-full h-72"
+          src={book.formats["image/jpeg"]}
+        ></img>
+      </Link>
       <div className="flex items-center gap-1 justify-between w-full h-full px-2">
         <div className="w-full">
           <h2>{book.title}</h2>
@@ -42,19 +48,6 @@ export default function Book({ book, readonly = false }: props) {
             title="add to favourites"
           ></i>
         )}
-        {/* {favourite === true ? (
-          <i
-            className="fa-solid fa-star cursor-pointer"
-            onClick={handleStarClick}
-            title="remove from favourites"
-          ></i>
-        ) : (
-          <i
-            className="fa-regular fa-star cursor-pointer"
-            onClick={handleStarClick}
-            title="add to favourites"
-          ></i>
-        )} */}
       </div>
     </div>
   );
