@@ -5,6 +5,7 @@ export default function BookDetails() {
   let { ID } = Route.useSearch();
   if (!ID) return <div>Invalid ID</div>;
   const { data, isPending, error } = useFetch(`https://Gutendex.com/books?ids=${ID}`);
+  if (error) return <>{error}</>;
   if (!isPending) {
     console.log(data);
   }
