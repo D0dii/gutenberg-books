@@ -19,7 +19,7 @@ export default function Home() {
   }
   return (
     <>
-      <div className="flex flex-col md:flex-row gap-4 justify-center items-center md:items-baseline bg-primary fixed top-0 pt-10 pb-4 w-full">
+      <div className="flex flex-col md:flex-row gap-4 justify-center items-center md:items-baseline bg-primary sticky top-0 pt-10 pb-4 w-full">
         <SearchBar isPending={isPending} />
         <Navigation />
         <Pager

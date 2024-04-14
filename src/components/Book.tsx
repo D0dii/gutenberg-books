@@ -20,7 +20,7 @@ export default function Book({ book, readonly = false }: props) {
       <Link to="/book" search={{ ID: book.id }} className="w-full" title="Go to book page">
         <img
           alt={`Image of ${book.title} book`}
-          className="object-cover"
+          className="object-cover w-full h-52 block"
           src={book.formats["image/jpeg"]}
         ></img>
       </Link>

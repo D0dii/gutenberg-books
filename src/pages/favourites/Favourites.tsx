@@ -6,7 +6,7 @@ export default function Favourites() {
   let favourites = useGetFavouriteBooks();
   return (
     <>
-      <div className="flex gap-4 justify-center items-baseline bg-primary fixed w-full top-0 pt-10 pb-4">
+      <div className="flex gap-4 justify-center items-baseline bg-primary sticky w-full top-0 pt-10 pb-4">
         <Navigation />
       </div>
       <div className="text-center px-24 bg-primary mt-20">
