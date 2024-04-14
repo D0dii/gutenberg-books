@@ -18,8 +18,8 @@ export default function Home() {
     console.log(data);
   }
   return (
-    <div className="text-center px-24">
-      <div className="flex gap-4 justify-center items-baseline bg-primary sticky top-0 pt-10 pb-4">
+    <>
+      <div className="flex flex-col md:flex-row gap-4 justify-center items-center md:items-baseline bg-primary fixed top-0 pt-10 pb-4 w-full">
         <SearchBar isPending={isPending} />
         <Navigation />
         <Pager
@@ -29,22 +29,24 @@ export default function Home() {
           isPending={isPending}
         />
       </div>
-      {isPending ? (
-        <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {bookFallbacks.map((bookFallback) => bookFallback)}
-        </div>
-      ) : (
-        <>
-          {data && (
-            <h2 className="text-3xl mt-8">
-              Showing {data?.results.length} of {data?.count} results
-            </h2>
-          )}
-          <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {data && data.results.map((result) => <Book key={result.id} book={{ ...result }} />)}
+      <div className="text-center px-24">
+        {isPending ? (
+          <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-20">
+            {bookFallbacks.map((bookFallback) => bookFallback)}
           </div>
-        </>
-      )}
-    </div>
+        ) : (
+          <>
+            {data && (
+              <h2 className="text-3xl mt-8">
+                Showing {data?.results.length} of {data?.count} results
+              </h2>
+            )}
+            <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {data && data.results.map((result) => <Book key={result.id} book={{ ...result }} />)}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 }

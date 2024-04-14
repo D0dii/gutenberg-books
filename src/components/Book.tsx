@@ -16,11 +16,11 @@ export default function Book({ book, readonly = false }: props) {
     setFavourite(!favourite);
   }
   return (
-    <div className="flex flex-col gap-2 items-center bg-secondary pb-2 rounded-md overflow-hidden">
+    <div className="flex flex-col gap-2 items-center bg-secondary pb-2 rounded-md overflow-hidden w-42">
       <Link to="/book" search={{ ID: book.id }} className="w-full" title="Go to book page">
         <img
           alt={`Image of ${book.title} book`}
-          className="w-full h-48"
+          className="object-cover"
           src={book.formats["image/jpeg"]}
         ></img>
       </Link>
