@@ -31,7 +31,7 @@ export default function Home() {
       </div>
       <div className="text-center px-24">
         {isPending ? (
-          <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-20">
+          <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-20 justify-items-center">
             {bookFallbacks.map((bookFallback) => bookFallback)}
           </div>
         ) : (
@@ -41,7 +41,7 @@ export default function Home() {
                 Showing {data?.results.length} of {data?.count} results
               </h2>
             )}
-            <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-items-center">
               {data && data.results.map((result) => <Book key={result.id} book={{ ...result }} />)}
             </div>
           </>

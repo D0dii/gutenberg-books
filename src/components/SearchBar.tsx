@@ -5,7 +5,6 @@ import { Route } from "routes/index.lazy";
 export default function SearchBar({ isPending }: { isPending: boolean }) {
   let { search } = Route.useSearch();
   const navigate = useNavigate();
-
   const searchChange = useDebouncedCallback((e: any) => {
     navigate({ search: { search: e.target.value } });
   }, 1000);
