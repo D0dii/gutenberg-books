@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 export const useFetch = (url: string) => {
-  const [data, setData] = useState<{ results: Book[]; next: string | null } | null>(null);
-  const [isPending, setIsPending] = useState(false);
+  const [data, setData] = useState<{ results: Book[]; next: string | null; count: number } | null>(null);
+  const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     const fetchData = async () => {

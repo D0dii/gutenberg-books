@@ -16,18 +16,18 @@ export default function Book({ book, readonly = false }: props) {
     setFavourite(!favourite);
   }
   return (
-    <div className="flex flex-col gap-2 items-center bg-secondary pb-2 rounded-2xl overflow-hidden">
+    <div className="flex flex-col gap-2 items-center bg-secondary pb-2 rounded-md overflow-hidden">
       <Link to="/book" search={{ ID: book.id }} className="w-full" title="Go to book page">
         <img
           alt={`Image of ${book.title} book`}
-          className="w-full h-72"
+          className="w-full h-48"
           src={book.formats["image/jpeg"]}
         ></img>
       </Link>
       <div className="flex items-center gap-1 justify-between w-full h-full px-2">
         <div className="w-full">
-          <h2>{book.title}</h2>
-          <h3>
+          <h2 className="py-2">{book.title}</h2>
+          <h3 className="text-sm">
             {book.authors.map((author) => (
               <div>{author.name}</div>
             ))}

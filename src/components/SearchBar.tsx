@@ -10,9 +10,9 @@ export default function SearchBar({ isPending }: { isPending: boolean }) {
     navigate({ search: { search: e.target.value } });
   }, 1000);
   return (
-    <div className="mt-4">
+    <div>
       <input
-        className="border-none rounded-2xl p-2 text-primary outline-none placeholder:text-secondary placeholder:italic"
+        className="border-none rounded-md p-2 text-primary outline-none placeholder:text-secondary placeholder:italic"
         type="search"
         placeholder="Search for a book..."
         onChange={searchChange}
