@@ -23,8 +23,10 @@
     "paths": {
       "hooks/*": ["src/hooks/*"],
       "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"]
-    }
+      "pages/*": ["src/pages/*"],
+      "test/*": ["src/test/*"]
+    },
+    "types": ["vitest/globals"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -34,27 +34,16 @@ export default function Book({ book, readonly = false }: props) {
             className="fa-solid fa-star cursor-pointer"
             onClick={handleStarClick}
             title="remove from favourites"
+            data-testid="favourite"
           ></i>
         ) : (
           <i
             className="fa-regular fa-star cursor-pointer"
             onClick={handleStarClick}
             title="add to favourites"
+            data-testid="not-favourite"
           ></i>
         )}
-        {/* {favourite === true ? (
-          <i
-            className="fa-solid fa-star cursor-pointer"
-            onClick={handleStarClick}
-            title="remove from favourites"
-          ></i>
-        ) : (
-          <i
-            className="fa-regular fa-star cursor-pointer"
-            onClick={handleStarClick}
-            title="add to favourites"
-          ></i>
-        )} */}
       </div>
     </div>
   );
