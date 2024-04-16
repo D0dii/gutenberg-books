@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+import { render } from "test/test-utils";
 import "@testing-library/jest-dom";
 import Book from "components/Book";
 
@@ -18,14 +19,20 @@ test("test changing star when adding/deleting to/from favourites", async () => {
   render(<Book book={dummyBook} />);
 
   // ACT
-  const notFavouriteStar = screen.getByTestId("not-favourite");
-  expect(notFavouriteStar).toBeInTheDocument();
-  fireEvent.click(notFavouriteStar);
-  const favouriteStar = screen.getByTestId("favourite");
-  expect(favouriteStar).toBeInTheDocument();
-  fireEvent.click(favouriteStar);
-  const notFavouriteStar2 = screen.getByTestId("not-favourite");
-  expect(notFavouriteStar2).toBeInTheDocument();
+  await waitFor(() => {
+    const notFavouriteStar = screen.getByTestId("not-favourite");
+    expect(notFavouriteStar).toBeInTheDocument();
+    fireEvent.click(notFavouriteStar);
+  });
+  await waitFor(() => {
+    const favouriteStar = screen.getByTestId("favourite");
+    expect(favouriteStar).toBeInTheDocument();
+    fireEvent.click(favouriteStar);
+  });
+  await waitFor(() => {
+    const notFavouriteStar = screen.getByTestId("not-favourite");
+    expect(notFavouriteStar).toBeInTheDocument();
+  });
 });
 
 test("test adding/deleting to/from favourites", async () => {
@@ -36,16 +43,20 @@ test("test adding/deleting to/from favourites", async () => {
 
   expect(favourites).toBe("[]");
 
-  const notFavouriteStar = screen.getByTestId("not-favourite");
-  expect(notFavouriteStar).toBeInTheDocument();
-  fireEvent.click(notFavouriteStar);
+  await waitFor(() => {
+    const notFavouriteStar = screen.getByTestId("not-favourite");
+    expect(notFavouriteStar).toBeInTheDocument();
+    fireEvent.click(notFavouriteStar);
+  });
 
   let favourites2 = JSON.parse(localStorage.getItem("favourites") as string);
   expect(favourites2).toEqual([dummyBook]);
 
-  const favouriteStar = screen.getByTestId("favourite");
-  expect(favouriteStar).toBeInTheDocument();
-  fireEvent.click(favouriteStar);
+  await waitFor(() => {
+    const favouriteStar = screen.getByTestId("favourite");
+    expect(favouriteStar).toBeInTheDocument();
+    fireEvent.click(favouriteStar);
+  });
 
   let favourites3 = localStorage.getItem("favourites");
   expect(favourites3).toBe("[]");
