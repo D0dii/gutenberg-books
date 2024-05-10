@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "extends": [
+    "@alergeek-ventures/eslint-config/typescript",
+    "@alergeek-ventures/eslint-config/react",
+    "@alergeek-ventures/eslint-config/tests"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "root": true,
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "jest": {
+      // not true, we're actually using vitest;
+      // but rules in this plugin (e.g.: no-focused-tests) work pretty well for
+      // us anyways
+      "version": 27
+    }
+  },
+  "rules": {
+    "simple-import-sort/imports": "off",
+    "simple-import-sort/exports": "off"
+  },
+  "overrides": [
+    {
+      "files": ["pages/**/*"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
+}
