@@ -1,13 +1,18 @@
 import { useNavigate } from "@tanstack/react-router";
-import { useDebouncedCallback } from "use-debounce";
+import type { ChangeEvent } from "react";
 import { Route } from "routes/index.lazy";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function SearchBar({ isPending }: { isPending: boolean }) {
-  let { search } = Route.useSearch();
+  const { search } = Route.useSearch();
+  const miliseconds = 1000;
   const navigate = useNavigate();
-  const searchChange = useDebouncedCallback((e: any) => {
-    navigate({ search: { search: e.target.value } });
-  }, 1000);
+  const searchChange = useDebouncedCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      void navigate({ search: { search: e.target.value } });
+    },
+    miliseconds,
+  );
   return (
     <div>
       <input
@@ -15,9 +20,9 @@ export default function SearchBar({ isPending }: { isPending: boolean }) {
         type="search"
         placeholder="Search for a book..."
         onChange={searchChange}
-        defaultValue={search ?? ""}
+        defaultValue={search}
         disabled={isPending}
-      ></input>
+      />
     </div>
   );
 }
