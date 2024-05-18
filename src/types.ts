@@ -1,17 +1,20 @@
-type Book = {
+export interface Book {
   id: number;
   title: string;
   authors: Author[];
   bookshelves: string[];
-  formats: any;
+  formats: {
+    ["text/html"]: string;
+    ["image/jpeg"]: string;
+  };
   languages: string[];
   subjects: string[];
   translators: Author[];
   copyright?: boolean;
-};
+}
 
-type Author = {
+interface Author {
   birthYear?: number;
   name: string;
   deathYear?: number;
-};
+}

@@ -1,63 +1,69 @@
-import { fireEvent, screen, waitFor } from "@testing-library/react";
-import { render } from "test/test-utils";
 import "@testing-library/jest-dom";
-import Book from "components/Book";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
+import BookCard from "components/BookCard";
+import type { Book } from "src/types";
+import { render } from "test/test-utils";
 
-const dummyBook = {
+const dummyBook: Book = {
   title: "The Great Gatsby",
   authors: [{ name: "F. Scott Fitzgerald" }],
   bookshelves: ["Best Books Ever"],
-  formats: {},
+  formats: {
+    "text/html": "https://www.gutenberg.org/ebooks/64317",
+    "image/jpeg":
+      "https://www.gutenberg.org/cache/epub/64317/pg64317.cover.medium.jpg",
+  },
   languages: ["en"],
   subjects: ["fiction"],
   translators: [],
   id: 5,
 };
 
-test("test changing star when adding/deleting to/from favourites", async () => {
+it("test changing star when adding/deleting to/from favourites", async () => {
   // ARRANGE
-  render(<Book book={dummyBook} />);
+  render(<BookCard book={dummyBook} />);
 
   // ACT
+  const notFavouriteStar = await screen.findByTestId("not-favourite");
   await waitFor(() => {
-    const notFavouriteStar = screen.getByTestId("not-favourite");
     expect(notFavouriteStar).toBeInTheDocument();
-    fireEvent.click(notFavouriteStar);
   });
+  fireEvent.click(notFavouriteStar);
+  const favouriteStar = await screen.findByTestId("favourite");
   await waitFor(() => {
-    const favouriteStar = screen.getByTestId("favourite");
     expect(favouriteStar).toBeInTheDocument();
-    fireEvent.click(favouriteStar);
   });
+  fireEvent.click(favouriteStar);
+  const notFavouriteStar2 = await screen.findByTestId("not-favourite");
   await waitFor(() => {
-    const notFavouriteStar = screen.getByTestId("not-favourite");
-    expect(notFavouriteStar).toBeInTheDocument();
+    expect(notFavouriteStar2).toBeInTheDocument();
   });
 });
 
-test("test adding/deleting to/from favourites", async () => {
+it("test adding/deleting to/from favourites", async () => {
   // ARRANGE
-  render(<Book book={dummyBook} />);
+  render(<BookCard book={dummyBook} />);
 
-  let favourites = localStorage.getItem("favourites");
+  const favourites = localStorage.getItem("favourites");
 
   expect(favourites).toBe("[]");
 
+  const notFavouriteStar = await screen.findByTestId("not-favourite");
   await waitFor(() => {
-    const notFavouriteStar = screen.getByTestId("not-favourite");
     expect(notFavouriteStar).toBeInTheDocument();
-    fireEvent.click(notFavouriteStar);
   });
+  fireEvent.click(notFavouriteStar);
 
-  let favourites2 = JSON.parse(localStorage.getItem("favourites") as string);
+  const favourites2 = JSON.parse(
+    localStorage.getItem("favourites") as string,
+  ) as Book[];
   expect(favourites2).toEqual([dummyBook]);
-
+  const favouriteStar = await screen.findByTestId("favourite");
   await waitFor(() => {
-    const favouriteStar = screen.getByTestId("favourite");
     expect(favouriteStar).toBeInTheDocument();
-    fireEvent.click(favouriteStar);
   });
+  fireEvent.click(favouriteStar);
 
-  let favourites3 = localStorage.getItem("favourites");
+  const favourites3 = localStorage.getItem("favourites");
   expect(favourites3).toBe("[]");
 });

@@ -9,7 +9,7 @@ import {
 import { render } from "@testing-library/react";
 
 function createTestRouter(ui: React.ReactElement) {
-  const rootRoute = createRootRouteWithContext<{}>()({
+  const rootRoute = createRootRouteWithContext<object>()({
     component: Outlet,
   });
 

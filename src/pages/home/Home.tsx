@@ -1,4 +1,4 @@
-import Book from "components/Book";
+import BookCard from "components/BookCard";
 import BookFallback from "components/BookFallback";
 import Navigation from "components/Navigation";
 import Pager from "components/Pager";
@@ -7,15 +7,18 @@ import { useFetch } from "hooks/useFetch";
 import { Route } from "routes/index.lazy";
 
 export default function Home() {
-  const bookFallbacks = Array.from({ length: 20 }, (_, i) => <BookFallback key={i} />);
+  const bookFallbacks = Array.from({ length: 20 }, (_, i) => (
+    <BookFallback key={i} />
+  ));
   let { page, search } = Route.useSearch();
   page = page || 1;
   search = search || "";
 
-  const { data, isPending, error } = useFetch(`https://Gutendex.com/books/?page=${page}&search=${search}`);
-  if (error) return <>{error}</>;
-  if (data) {
-    console.log(data);
+  const { data, isPending, error } = useFetch(
+    `https://Gutendex.com/books/?page=${page}&search=${search}`,
+  );
+  if (error !== null) {
+    return { error };
   }
   return (
     <>
@@ -36,13 +39,17 @@ export default function Home() {
           </div>
         ) : (
           <>
-            {data && (
+            {data ? (
               <h2 className="text-3xl mt-8">
-                Showing {data?.results.length} of {data?.count} results
+                Showing {data.results.length} of {data.count} results
               </h2>
-            )}
+            ) : null}
             <div className="py-16 grid gap-8 xs:gap-16 grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 justify-items-center">
-              {data && data.results.map((result) => <Book key={result.id} book={{ ...result }} />)}
+              {data
+                ? data.results.map((result) => (
+                    <BookCard key={result.id} book={{ ...result }} />
+                  ))
+                : null}
             </div>
           </>
         )}

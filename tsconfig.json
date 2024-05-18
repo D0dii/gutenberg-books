@@ -25,7 +25,9 @@
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"],
       "routes/*": ["src/routes/*"],
-      "test/*": ["src/test/*"]
+      "test/*": ["src/test/*"],
+      "utils/*": ["src/utils/*"],
+      "types/*": ["src/types/*"]
     },
     "types": ["vitest/globals"]
   },

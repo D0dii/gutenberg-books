@@ -13,10 +13,10 @@ export default function Pager({
 }) {
   const navigate = useNavigate();
   function handlePrevious() {
-    navigate({ search: { search: search, page: page - 1 } });
+    void navigate({ search: { search: search, page: page - 1 } });
   }
   function handleNext() {
-    navigate({ search: { search: search, page: page + 1 } });
+    void navigate({ search: { search: search, page: page + 1 } });
   }
 
   return (
@@ -30,7 +30,7 @@ export default function Pager({
           Previous
         </button>
       )}
-      {next && (
+      {next ? (
         <button
           onClick={handleNext}
           className="bg-secondary text-white px-4 py-2 rounded-lg"
@@ -38,7 +38,7 @@ export default function Pager({
         >
           Next
         </button>
-      )}
+      ) : null}
     </div>
   );
 }
